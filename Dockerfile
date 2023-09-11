@@ -84,8 +84,8 @@ ARG APP_NAME="itop"
 WORKDIR /var/www/$APP_NAME
 
 #=== Add iTop source code ===
-ARG ITOP_VERSION=2.7.6
-ARG ITOP_PATCH=8526
+ARG ITOP_VERSION
+ARG ITOP_PATCH
 RUN set -x \
  && buildDeps="libarchive-tools" \
  && apt-get update && apt-get install -y ${buildDeps} --no-install-recommends \
@@ -134,6 +134,20 @@ ENV PHP_TIMEZONE=${PHP_TIMEZONE} \
     PHP_MAX_INPUT_TIME=${PHP_MAX_INPUT_TIME} \
     PHP_LOG_ERRORS=${PHP_LOG_ERRORS} \
     PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING}
+	
+#=== Install MariaDB client and Vim and Crontab===
+RUN apt-get update && apt-get install -y mariadb-client && apt-get install -y vim && apt-get install -y cron
+
+# Add the cron job
+ARG ITOP_ADMIN
+ARG ITOP_ADMIN_PASS
+RUN crontab -l | { cat; \
+	echo "# Synchro itop data"; \
+	echo "30 21 * * * /bin/sh /var/www/synchro_exec_itop.sh > /tmp/synchro_itop.log"; \
+	echo ""; \
+	echo "# Taches plannifiees itop (sauvegardes auto)"; \
+	echo "*/5 * * * * /usr/local/bin/php /var/www/itop/webservices/cron.php --auth_user=${ITOP_ADMIN} --auth_pwd='${ITOP_ADMIN_PASS}' --debug=1 --size_min=20 --time_limit=40 > /var/log/itop-cron.log 2>&1"; \	
+	} | crontab -
 
 #=== Set custom entrypoint ===
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint

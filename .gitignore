@@ -2,4 +2,6 @@
 volumes/*
 initdb/*
 extensions/*
+.idea/*
+.env
 

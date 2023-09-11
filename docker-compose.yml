@@ -3,16 +3,20 @@ version: "3.9"
 # Use this file for an example for production
 
 services:
-  db:
+  itop-db:
     image: mariadb:10.4
+    container_name: itop-db
     restart: unless-stopped 
     stdin_open: true
     networks:
-      - mynetwork
+      - default
+    mem_limit: ${ITOP_MEM_LIMIT}
+    memswap_limit: ${ITOP_MEMSWAP_LIMIT}
+    cpus: ${ITOP_CPU_LIMIT}
     ports:
-      - "3306:3306"
+      - "${ITOP_DB_PORT}:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${ITOP_MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${ITOP_DB_NAME}
       - MYSQL_USER=${ITOP_DB_USER}
       - MYSQL_PASSWORD=${ITOP_DB_PASS}
@@ -27,39 +31,48 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-      - PHP_TIMEZONE=${PHP_TIMEZONE}
-      - PHP_ENABLE_UPLOADS=${PHP_ENABLE_UPLOADS}
-      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT}
-      - PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE}
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE}
-      - PHP_MAX_FILE_UPLOADS=${PHP_MAX_FILE_UPLOADS}
-      - PHP_MAX_INPUT_TIME=${PHP_MAX_INPUT_TIME}
-      - PHP_LOG_ERRORS=${PHP_LOG_ERRORS}
-      - PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING}
-
+      - PHP_TIMEZONE=${ITOP_PHP_TIMEZONE}
+      - PHP_ENABLE_UPLOADS=${ITOP_PHP_ENABLE_UPLOADS}
+      - PHP_MEMORY_LIMIT=${ITOP_PHP_MEMORY_LIMIT}
+      - PHP_POST_MAX_SIZE=${ITOP_PHP_POST_MAX_SIZE}
+      - PHP_UPLOAD_MAX_FILESIZE=${ITOP_PHP_UPLOAD_MAX_FILESIZE}
+      - PHP_MAX_FILE_UPLOADS=${ITOP_PHP_MAX_FILE_UPLOADS}
+      - PHP_MAX_INPUT_TIME=${ITOP_PHP_MAX_INPUT_TIME}
+      - PHP_LOG_ERRORS=${ITOP_PHP_LOG_ERRORS}
+      - PHP_ERROR_REPORTING=${ITOP_PHP_ERROR_REPORTING}
+      - ITOP_VERSION=${ITOP_VERSION}
+      - ITOP_PATCH=${ITOP_PATCH}
+      - ITOP_ADMIN=${ITOP_ADMIN}
+      - ITOP_ADMIN_PASS=${ITOP_ADMIN_PASS}      
+    container_name: itop
 #    image: vbkunin/itop:2.7.4-base
     restart: unless-stopped
-    stdin_open: true
+    #stdin_open: true
     networks:
-      - mynetwork
+      - default
+    mem_limit: ${ITOP_MEM_LIMIT}
+    memswap_limit: ${ITOP_MEMSWAP_LIMIT}
+    cpus: ${ITOP_CPU_LIMIT}
     environment:
       - ITOP_DB_HOST=${ITOP_DB_HOST}
       - ITOP_DB_NAME=${ITOP_DB_NAME}
       - ITOP_DB_USER=${ITOP_DB_USER}
       - ITOP_DB_PASS=${ITOP_DB_PASS}
-      - PHP_TIMEZONE=${PHP_TIMEZONE}
-      - PHP_ENABLE_UPLOADS=${PHP_ENABLE_UPLOADS}
-      - PHP_MEMORY_LIMIT=${PHP_MEMORY_LIMIT}
-      - PHP_POST_MAX_SIZE=${PHP_POST_MAX_SIZE}
-      - PHP_UPLOAD_MAX_FILESIZE=${PHP_UPLOAD_MAX_FILESIZE}
-      - PHP_MAX_FILE_UPLOADS=${PHP_MAX_FILE_UPLOADS}
-      - PHP_MAX_INPUT_TIME=${PHP_MAX_INPUT_TIME}
-      - PHP_LOG_ERRORS=${PHP_LOG_ERRORS}
-      - PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING}
+      - ITOP_ADMIN=${ITOP_ADMIN}
+      - ITOP_ADMIN_PASS=${ITOP_ADMIN_PASS}
+      - PHP_TIMEZONE=${ITOP_PHP_TIMEZONE}
+      - PHP_ENABLE_UPLOADS=${ITOP_PHP_ENABLE_UPLOADS}
+      - PHP_MEMORY_LIMIT=${ITOP_PHP_MEMORY_LIMIT}
+      - PHP_POST_MAX_SIZE=${ITOP_PHP_POST_MAX_SIZE}
+      - PHP_UPLOAD_MAX_FILESIZE=${ITOP_PHP_UPLOAD_MAX_FILESIZE}
+      - PHP_MAX_FILE_UPLOADS=${ITOP_PHP_MAX_FILE_UPLOADS}
+      - PHP_MAX_INPUT_TIME=${ITOP_PHP_MAX_INPUT_TIME}
+      - PHP_LOG_ERRORS=${ITOP_PHP_LOG_ERRORS}
+      - PHP_ERROR_REPORTING=${ITOP_PHP_ERROR_REPORTING}
     links:
-      - db
+      - itop-db
     ports:
-      - "8080:80"
+      - "${ITOP_PORT}:80"
     volumes:
       - ./volumes/itop/conf:/var/www/itop/conf
       - ./volumes/itop/data:/var/www/itop/data
@@ -67,20 +80,22 @@ services:
       - ./volumes/itop/env-production:/var/www/itop/env-production
       - ./volumes/itop/env-production-build:/var/www/itop/env-production-build
       - ./extensions:/var/www/itop/extensions
+      - ./synchro_exec_itop.sh:/var/www/synchro_exec_itop
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-  adminer:
+      
+  itop-adminer:
     image: adminer
+    container_name: itop-adminer
     restart: unless-stopped
     stdin_open: true
     networks:
-      - mynetwork
+      - default
+    mem_limit: ${ITOP_MEM_LIMIT}
+    memswap_limit: ${ITOP_MEMSWAP_LIMIT}
+    cpus: ${ITOP_CPU_LIMIT}
     links:
-      - db
+      - itop-db
     ports:
-      - "8000:8080"
-
-networks:
-  mynetwork:
-    driver: bridge
+      - "${ITOP_ADMINER_PORT}:8080"
 

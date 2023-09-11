@@ -27,10 +27,10 @@ if [ -z "$ITOP_DB_HOST" -a ! -e "./config/database.php" ]; then
   echo >&2 '  Did you forget to --link some_mysql_container:db ?'
 else
   #=== DB user and pass ===
-  : ${ITOP_DB_USER:=root}
-  if [ "$ITOP_DB_USER" = 'root' ]; then
-    : ${ITOP_DB_PASS:=$DB_ENV_MYSQL_ROOT_PASSWORD}
-  fi
+  #: ${ITOP_DB_USER:=root}
+  #if [ "$ITOP_DB_USER" = 'root' ]; then
+  #  : ${ITOP_DB_PASS:=$DB_ENV_MYSQL_ROOT_PASSWORD}
+  #fi
 
   if [ -z "$ITOP_DB_PASS" ]; then
     echo >&2 'ERROR: missing required ITOP_DB_PASS environment variable'
