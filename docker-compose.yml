@@ -23,8 +23,6 @@ services:
     volumes:
       - ./volumes/mariadb:/var/lib/mysql
       - ./initdb:/docker-entrypoint-initdb.d
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
@@ -86,8 +84,6 @@ services:
       - ./volumes/itop/env-production-build:/var/www/itop/env-production-build
       - ./extensions:/var/www/itop/extensions
       - ./synchro_exec_itop.sh:/var/www/synchro_exec_itop
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
