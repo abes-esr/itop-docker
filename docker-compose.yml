@@ -25,6 +25,11 @@ services:
       - ./initdb:/docker-entrypoint-initdb.d
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+    labels:
+      - "co.elastic.logs/enabled=true"
+      - "co.elastic.logs/processors.add_fields.target="
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=itop"
+      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop-db"
 
   itop:
     build:
@@ -83,6 +88,11 @@ services:
       - ./synchro_exec_itop.sh:/var/www/synchro_exec_itop
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
+    labels:
+      - "co.elastic.logs/enabled=true"
+      - "co.elastic.logs/processors.add_fields.target="
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=itop"
+      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop"
       
   itop-adminer:
     image: adminer
@@ -98,4 +108,9 @@ services:
       - itop-db
     ports:
       - "${ITOP_ADMINER_PORT}:8080"
+    labels:
+      - "co.elastic.logs/enabled=true"
+      - "co.elastic.logs/processors.add_fields.target="
+      - "co.elastic.logs/processors.add_fields.fields.abes_appli=itop"
+      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop-adminer"
 
