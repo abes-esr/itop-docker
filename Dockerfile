@@ -134,7 +134,12 @@ ENV PHP_TIMEZONE=${PHP_TIMEZONE} \
     PHP_MAX_INPUT_TIME=${PHP_MAX_INPUT_TIME} \
     PHP_LOG_ERRORS=${PHP_LOG_ERRORS} \
     PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING}
-	
+
+#=== allow ldaps connection without certificate ===
+RUN { \
+  echo "TLS_REQCERT allow"; \  
+ } | tee "/etc/ldap/ldap.conf"
+ 
 #=== Install MariaDB client and Vim and Crontab===
 RUN apt-get update && apt-get install -y mariadb-client && apt-get install -y vim && apt-get install -y cron
 
