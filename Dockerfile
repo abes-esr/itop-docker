@@ -136,9 +136,7 @@ ENV PHP_TIMEZONE=${PHP_TIMEZONE} \
     PHP_ERROR_REPORTING=${PHP_ERROR_REPORTING}
 
 #=== allow ldaps connection without certificate ===
-RUN { \
-  echo "TLS_REQCERT allow"; \  
- } | tee "/etc/ldap/ldap.conf"
+RUN mkdir /etc/ldap && echo "TLS_REQCERT allow" > /etc/ldap/ldap.conf
  
 #=== Install MariaDB client and Vim and Crontab===
 RUN apt-get update && apt-get install -y mariadb-client && apt-get install -y vim && apt-get install -y cron
