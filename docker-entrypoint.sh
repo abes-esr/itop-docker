@@ -3,6 +3,10 @@
 # Exit on error
 set -e
 
+# start cron
+echo "Starting cron..."
+service cron start
+
 echo "Starting iTop..."
 
 #=== Set shared folder permissions ===
