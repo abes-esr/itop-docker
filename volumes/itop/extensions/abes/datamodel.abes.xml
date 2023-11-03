@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<itop_design xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0">
+  <constants>
+  </constants>
+  <classes>
+    <class id="FunctionalCI">
+      <!--Parent de tous les CI-->
+      <fields>
+        <field id="abes_cle_externe" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>abes_cle_externe</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+      </fields>
+    </class>
+    <class id="PhysicalDevice">
+      <fields>
+        <field id="status" xsi:type="AttributeEnum" _delta="merge">
+          <values _delta="merge">
+            <value id="hs" _delta="define_if_not_exists">hors_service</value>
+            <value id="sortie" _delta="define_if_not_exists">sortie_inventaire</value>
+          </values>
+        </field>
+        <field id="date_sortie" xsi:type="AttributeDate" _delta="define_if_not_exists">
+          <sql>date_sortie</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+      </fields>
+    </class>
+    <class id="NetworkDevice">
+      <presentation>
+        <details>
+          <items>           
+            <item id="col:col2">
+              <items>
+                <item id="fieldset:Server:Date">                  
+                  <items>
+                    <item id="date_sortie" _delta="define">
+                      <rank>35</rank>
+                    </item>
+                  </items>
+                </item>                
+              </items>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>                                
+            <item id="date_sortie" _delta="define">
+              <rank>145</rank>
+            </item>
+          </items>
+        </search>
+      </presentation>  
+    </class>
+    <class id="StorageSystem">
+      <presentation>
+        <details>
+          <items>           
+            <item id="col:col2">
+              <items>
+                <item id="fieldset:Server:Date">                  
+                  <items>
+                    <item id="date_sortie" _delta="define">
+                      <rank>35</rank>
+                    </item>
+                  </items>
+                </item>                
+              </items>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>                                
+            <item id="date_sortie" _delta="define">
+              <rank>145</rank>
+            </item>
+          </items>
+        </search>
+      </presentation>  
+    </class>  
+    <class id="SANSwitch">
+      <presentation>
+        <details>
+          <items>           
+            <item id="col:col2">
+              <items>
+                <item id="fieldset:Server:Date">                  
+                  <items>
+                    <item id="date_sortie" _delta="define">
+                      <rank>35</rank>
+                    </item>
+                  </items>
+                </item>                
+              </items>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>                                
+            <item id="date_sortie" _delta="define">
+              <rank>145</rank>
+            </item>
+          </items>
+        </search>
+      </presentation>  
+    </class>
+    
+    <class id="NAS">
+      <presentation>
+        <details>
+          <items>           
+            <item id="col:col2">
+              <items>
+                <item id="fieldset:Server:Date">                  
+                  <items>
+                    <item id="date_sortie" _delta="define">
+                      <rank>35</rank>
+                    </item>
+                  </items>
+                </item>                
+              </items>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>                                
+            <item id="date_sortie" _delta="define">
+              <rank>145</rank>
+            </item>
+          </items>
+        </search>
+      </presentation>  
+    </class>
+    
+    <class id="PC">
+      <presentation>
+        <details>
+          <items>           
+            <item id="col:col2">
+              <items>
+                <item id="fieldset:Server:Date">                  
+                  <items>
+                    <item id="date_sortie" _delta="define">
+                      <rank>35</rank>
+                    </item>
+                  </items>
+                </item>                
+              </items>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>                                
+            <item id="date_sortie" _delta="define">
+              <rank>145</rank>
+            </item>
+          </items>
+        </search>
+      </presentation>  
+    </class>
+    
+    
+    <class id="Server">
+      <fields>
+        <field id="notes" xsi:type="AttributeText" _delta="define_if_not_exists">
+          <sql>notes</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="abes_etat" xsi:type="AttributeEnum" _delta="define_if_not_exists">
+          <values>
+            <value id="active">active</value>
+            <value id="inactive">inactive</value>
+          </values>
+          <sql>abes_etat</sql>
+          <default_value>active</default_value>
+          <is_null_allowed>true</is_null_allowed>
+          <display_style>list</display_style>
+        </field>
+      </fields>
+      <presentation>
+        <details>
+          <items>
+            <item id="col:col1">
+              <items>
+                <item id="fieldset:Server:baseinfo">
+                  <items>
+                    <item id="abes_etat" _delta="define">
+                      <rank>41</rank>
+                    </item>                 
+                  </items>
+                </item>                         
+              </items>
+            </item>
+            <item id="col:col2">
+              <items>
+                <item id="fieldset:Server:Date">                  
+                  <items>
+                    <item id="date_sortie" _delta="define">
+                      <rank>35</rank>
+                    </item>
+                  </items>
+                </item>
+                <item id="fieldset:Server:otherinfo">                 
+                  <items>
+                    <item id="notes" _delta="define">
+                      <rank>20</rank>
+                    </item>
+                  </items>
+                </item>
+              </items>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>          
+            <item id="abes_etat" _delta="define">
+              <rank>41</rank>
+            </item>            
+            <item id="date_sortie" _delta="define">
+              <rank>145</rank>
+            </item>
+          </items>
+        </search>
+      </presentation>
+    </class>
+    <class id="Person">
+      <fields>
+        <field id="Trigramme" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>trigramme</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+      </fields>
+      <presentation>
+        <details>
+          <items>            
+            <item id="col:col1">
+              <rank>40</rank>
+              <items>
+                <item id="fieldset:Person:info">
+                  <items>
+                    <item id="Trigramme" _delta="define">
+                      <rank>90</rank>
+                    </item>
+                  </items>
+                </item>
+              </items>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>          
+            <item id="Trigramme" _delta="define">
+              <rank>120</rank>
+            </item>
+          </items>
+        </search>
+        <list>
+          <items>
+            <item id="Trigramme" _delta="define">
+              <rank>70</rank>
+            </item>
+          </items>
+        </list>
+      </presentation>
+    </class>
+    <class id="Contact">
+      <fields>
+        <field id="abes_cle_externe" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>abes_cle_externe</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+      </fields>
+    </class>
+    <class id="VirtualMachine">
+      <fields>
+        <field id="cpu_number" xsi:type="AttributeInteger" _delta="define_if_not_exists">
+          <sql>cpu_number</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="abes_etat" xsi:type="AttributeEnum" _delta="define_if_not_exists">
+          <values>
+            <value id="active">active</value>
+            <value id="inactive">inactive</value>
+          </values>
+          <sql>abes_etat</sql>
+          <default_value>active</default_value>
+          <is_null_allowed>true</is_null_allowed>
+          <display_style>list</display_style>
+        </field>
+      </fields>
+    </class>
+    <class id="ApplicationSolution">
+      <fields>
+        <field id="authentification" xsi:type="AttributeEnum" _delta="define_if_not_exists">
+          <values>
+            <value id="oui">oui</value>
+            <value id="non">non</value>
+          </values>
+          <sql>authentification</sql>
+          <default_value>non</default_value>
+          <is_null_allowed>true</is_null_allowed>
+          <display_style>list</display_style>
+        </field>
+        <field id="auth_compte_indiv" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_compte_indiv</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_compte_partage" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_compte_partage</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_compte_admin_partage" xsi:type="AttributeString"
+          _delta="define_if_not_exists">
+          <sql>auth_compte_admin_partage</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_stockage_compte" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_stockage_compte</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_stockage_mdp" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_stockage_mdp</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_donnees_perso" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_donnees_perso</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_groupe_securite" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_groupe_securite</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_base_reference" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_base_reference</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_protocole" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_protocole</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_reinit_mdp" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_reinit_mdp</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_algo_hash_mdp" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_algo_hash_mdp</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_complexite_mdp" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_complexite_mdp</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_pol_exp_mdp" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_pol_exp_mdp</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_pol_modif_mdp" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_pol_modif_mdp</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_sensibilisation_chgt_mdp" xsi:type="AttributeString"
+          _delta="define_if_not_exists">
+          <sql>auth_sensibilisation_chgt_mdp</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_nettoyage_compte" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_nettoyage_compte</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_mesure_protection" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>auth_mesure_protection</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="auth_commentaire" xsi:type="AttributeText" _delta="define_if_not_exists">
+          <sql>auth_commentaire</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+        <field id="url_urba" xsi:type="AttributeString" _delta="define_if_not_exists">
+          <sql>url_urba</sql>
+          <default_value/>
+          <is_null_allowed>true</is_null_allowed>
+        </field>
+      </fields>
+      <presentation>
+        <details _delta="redefine">
+          <items>
+            <item id="col:col1">
+              <rank>10</rank>
+              <items>
+                <item id="fieldset:ApplicationSolution:info">
+                  <rank>5</rank>
+                  <items>
+                    <item id="name">
+                      <rank>10</rank>
+                    </item>
+                    <item id="org_id">
+                      <rank>20</rank>
+                    </item>
+                    <item id="status">
+                      <rank>30</rank>
+                    </item>
+                    <item id="business_criticity">
+                      <rank>40</rank>
+                    </item>
+                    <item id="move2production">
+                      <rank>50</rank>
+                    </item>
+                  </items>
+                </item>
+                <item id="fieldset:ApplicationSolution:description">
+                  <rank>10</rank>
+                  <items>
+                    <item id="description">
+                      <rank>10</rank>
+                    </item>
+                  </items>
+                </item>
+                <!--item id="fieldset:ApplicationSolution:auth_info">
+					<rank>20</rank>
+					<items>					  
+					</items>
+				   </item-->
+              </items>
+            </item>
+            <item id="col:col2">
+              <rank>20</rank>
+              <items>
+                <item id="fieldset:ApplicationSolution:auth_info">
+                  <rank>5</rank>
+                  <items>
+                    <item id="authentification">
+                      <rank>10</rank>
+                    </item>
+                    <item id="auth_compte_indiv">
+                      <rank>20</rank>
+                    </item>
+                    <item id="auth_compte_partage">
+                      <rank>30</rank>
+                    </item>
+                    <item id="auth_compte_admin_partage">
+                      <rank>40</rank>
+                    </item>
+                    <item id="auth_stockage_compte">
+                      <rank>50</rank>
+                    </item>
+                    <item id="auth_stockage_mdp">
+                      <rank>60</rank>
+                    </item>
+                    <item id="auth_donnees_perso">
+                      <rank>70</rank>
+                    </item>
+                    <item id="auth_groupe_securite">
+                      <rank>80</rank>
+                    </item>
+                    <item id="auth_base_reference">
+                      <rank>90</rank>
+                    </item>
+                    <item id="auth_protocole">
+                      <rank>100</rank>
+                    </item>
+                    <item id="auth_reinit_mdp">
+                      <rank>110</rank>
+                    </item>
+                    <item id="auth_algo_hash_mdp">
+                      <rank>120</rank>
+                    </item>
+                    <item id="auth_complexite_mdp">
+                      <rank>130</rank>
+                    </item>
+                    <item id="auth_pol_exp_mdp">
+                      <rank>140</rank>
+                    </item>
+                    <item id="auth_pol_modif_mdp">
+                      <rank>150</rank>
+                    </item>
+                    <item id="auth_sensibilisation_chgt_mdp">
+                      <rank>160</rank>
+                    </item>
+                    <item id="auth_nettoyage_compte">
+                      <rank>170</rank>
+                    </item>
+                    <item id="auth_mesure_protection">
+                      <rank>180</rank>
+                    </item>
+                    <item id="auth_commentaire">
+                      <rank>190</rank>
+                    </item>
+                  </items>
+                </item>
+              </items>
+            </item>
+            <item id="contacts_list">
+              <rank>70</rank>
+            </item>
+            <item id="documents_list">
+              <rank>80</rank>
+            </item>
+            <item id="functionalcis_list">
+              <rank>100</rank>
+            </item>
+            <item id="businessprocess_list">
+              <rank>110</rank>
+            </item>
+            <item id="providercontracts_list">
+              <rank>120</rank>
+            </item>
+            <item id="services_list">
+              <rank>130</rank>
+            </item>
+          </items>
+        </details>
+        <search>
+          <items>           
+            <item id="authentification" _delta="define">
+              <rank>50</rank>
+            </item>
+          </items>
+        </search>
+        <list>
+          <items>           
+            <item id="authentification" _delta="define">
+              <rank>40</rank>
+            </item>
+          </items>
+        </list>
+      </presentation>
+    </class>
+  </classes>
+  <menus>
+  </menus>
+  <user_rights>
+	<groups>
+	</groups>
+	<profiles>
+	</profiles>
+  </user_rights>
+  <module_parameters>
+	<parameters id="abes-archi" _delta="define">
+		<archi_url>$this->url_urba$</archi_url>
+		<target_classes type="array">
+			<target_class>ApplicationSolution</target_class>
+		</target_classes>
+	</parameters>
+  </module_parameters>
+</itop_design>

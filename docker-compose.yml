@@ -82,8 +82,8 @@ services:
       - ./volumes/itop/log:/var/www/itop/log
       - ./volumes/itop/env-production:/var/www/itop/env-production
       - ./volumes/itop/env-production-build:/var/www/itop/env-production-build
-      - ./extensions:/var/www/itop/extensions
-      - ./synchro_exec_itop.sh:/var/www/synchro_exec_itop.sh
+      - ./volumes/itop/extensions:/var/www/itop/extensions
+      - ./volumes/synchro_exec_itop.sh:/var/www/synchro_exec_itop.sh
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
