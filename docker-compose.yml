@@ -45,8 +45,6 @@ services:
       - PHP_ERROR_REPORTING=${ITOP_PHP_ERROR_REPORTING}
       - ITOP_VERSION=${ITOP_VERSION}
       - ITOP_PATCH=${ITOP_PATCH}
-      - ITOP_ADMIN=${ITOP_ADMIN}
-      - ITOP_ADMIN_PASS=${ITOP_ADMIN_PASS}      
     container_name: itop
 #    image: vbkunin/itop:2.7.4-base
     restart: unless-stopped

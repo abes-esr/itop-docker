@@ -139,18 +139,8 @@ ENV PHP_TIMEZONE=${PHP_TIMEZONE} \
 RUN mkdir /etc/ldap && echo "TLS_REQCERT allow" > /etc/ldap/ldap.conf
  
 #=== Install MariaDB client and Vim and Crontab===
-RUN apt-get update && apt-get install -y mariadb-client && apt-get install -y vim && apt-get install -y cron
-
-# Add the cron job
-ARG ITOP_ADMIN
-ARG ITOP_ADMIN_PASS
-RUN crontab -l | { cat; \
-	echo "# Synchro itop data"; \
-	echo "30 21 * * * /bin/sh /var/www/synchro_exec_itop.sh > /tmp/synchro_itop.log"; \
-	echo ""; \
-	echo "# Taches plannifiees itop (sauvegardes auto)"; \
-	echo "*/5 * * * * /usr/local/bin/php /var/www/itop/webservices/cron.php --auth_user=${ITOP_ADMIN} --auth_pwd='${ITOP_ADMIN_PASS}' --debug=1 --size_min=20 --time_limit=40 > /var/log/itop-cron.log 2>&1"; \
-	} | crontab -
+RUN apt-get update && apt-get install -y mariadb-client && apt-get install -y vim
+#&& apt-get install -y cron
 
 #=== Set custom entrypoint ===
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint

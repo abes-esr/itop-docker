@@ -3,9 +3,15 @@
 # Exit on error
 set -e
 
+#{ echo "# Synchro itop data"; \
+#	echo "30 21 * * * /bin/sh /var/www/synchro_exec_itop.sh > /tmp/synchro_itop.log"; \
+#	echo ""; \
+#	echo "# Taches plannifiees itop (sauvegardes auto)"; \
+#	echo "*/5 * * * * /usr/local/bin/php /var/www/itop/webservices/cron.php --auth_user=${ITOP_ADMIN} --auth_pwd='${ITOP_ADMIN_PASS}' --debug=1 --size_min=20 --time_limit=40 > /var/log/itop-cron.log 2>&1"; \
+#	} | crontab -
 # start cron
-echo "Starting cron..."
-service cron start
+#echo "Starting cron..."
+#service cron start
 
 echo "Starting iTop..."
 
