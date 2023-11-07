@@ -139,8 +139,7 @@ ENV PHP_TIMEZONE=${PHP_TIMEZONE} \
 RUN mkdir /etc/ldap && echo "TLS_REQCERT allow" > /etc/ldap/ldap.conf
  
 #=== Install MariaDB client and Vim and Crontab===
-RUN apt-get update && apt-get install -y mariadb-client && apt-get install -y vim
-#&& apt-get install -y cron
+RUN apt-get update && apt-get install -y mariadb-client && apt-get install -y vim && apt-get install -y cron
 
 #=== Set custom entrypoint ===
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
