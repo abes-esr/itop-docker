@@ -31,7 +31,7 @@ services:
 
   itop:
     build:
-      context: .
+      context: ./docker/itop
       dockerfile: Dockerfile
       args:
       - PHP_TIMEZONE=${ITOP_PHP_TIMEZONE}
@@ -46,7 +46,6 @@ services:
       - ITOP_VERSION=${ITOP_VERSION}
       - ITOP_PATCH=${ITOP_PATCH}
     container_name: itop
-#    image: vbkunin/itop:2.7.4-base
     restart: unless-stopped
     #stdin_open: true
     networks:
@@ -81,30 +80,32 @@ services:
       - ./volumes/itop/env-production:/var/www/itop/env-production
       - ./volumes/itop/env-production-build:/var/www/itop/env-production-build
       - ./volumes/itop/extensions:/var/www/itop/extensions
-      - ./volumes/synchro_exec_itop.sh:/var/www/synchro_exec_itop.sh
+      - ./volumes/itop/synchro_exec_itop.sh:/var/www/synchro_exec_itop.sh
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=itop"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop"
       
-  itop-adminer:
-    image: adminer
-    container_name: itop-adminer
+  itop-talend:
+    build:
+      context: ./docker/talend
+      dockerfile: Dockerfile
+    container_name: itop-talend
     restart: unless-stopped
-    stdin_open: true
     networks:
       - default
+    #Copier https://git.abes.fr/supi/itop-talend/-/tree/master/SUPPLEMENTS
+    volumes:
+      - ./volumes/talend/SUPPLEMENTS:/scripts
     mem_limit: ${ITOP_MEM_LIMIT}
     memswap_limit: ${ITOP_MEMSWAP_LIMIT}
     cpus: ${ITOP_CPU_LIMIT}
-    links:
-      - itop-db
-    ports:
-      - "${ITOP_ADMINER_PORT}:8080"
+    #Spécifier le job à démarrer TEST / PROD ou rien
+    environment:
+      - ITOP_TALEND_JOB=${ITOP_TALEND_JOB}
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=itop"
-      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop-adminer"
-
+      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop-talend"
