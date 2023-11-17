@@ -1,33 +1,32 @@
-This repo is a fork of this one : https://github.com/Maghin/docker-iTop/tree/master 
+Ce dépôt est un fork de celui-ci : https://github.com/Maghin/docker-iTop/tree/master 
 
-It's an adaptation for use by Abes.
+Il s'agit d'une adaptation pour l'Abes.
 
-To run :
+Pour démarrer :
 
     docker compose up --build -database
 
-When Setup is complete, go to the itop container and change rights: 
+Quand l'installation est finie, aller dans le conteneur itop et changer les droits : 
   
     cd .. && chmod -R 777 itop && chmod 444 itop/conf/production/config-itop.php
 
-To stop : 
+Pour arrêter : 
 
     docker compose down -v
 
-It's possible to specify the version of iTop in the .env file.
+Il est possible de spécifier la version d'iTop dans le fichier .env (.env-dist en exemple, dans ce dépôt).
 
-All volumes are mounted in `./volumes`.
+Les volumes sont montés dans `./volumes`.
 
-Services will be available at following addresses:
+iTop est disponible à l'adresse :
 
 - iTop: (http://localhost:8080)
-- adminer: (http://localhost:8000)
 
 ## Sauvegarde
 
-Todo : compléter les éléments à sauvegarder (ex: les dumps de la base mariadb)
+Sauvegarder le répertoire : ``/opt/pod/itop-docker/volumes/itop/data`` qui contient les sauvegardes automatiques quotidiennes d'iTop.
 
-Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas besoin d'être sauvegardé. Et au contraire il est judicieux de l'exclure du système de sauvegarde car il contient les données binaires de du mariadb d'itop. 
+Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas besoin d'être sauvegardé. Et au contraire il est judicieux de l'exclure du système de sauvegarde car il contient les données binaires du mariadb d'itop. 
 
 
 ## License
