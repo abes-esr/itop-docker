@@ -60,7 +60,24 @@ Le conteneur itop-talend exécutera quotidiennement ces jobs.
 
     http://diplotaxis2-dev.v212.abes.fr:28080/
 
-Bien spécifier l'url publique d'itop (ex : https://itop-dev.abes.fr/) :
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/e42b99eb-e0e2-491d-a456-4372add020a0)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/6582a958-574b-475e-8416-4d25e2d79a60)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/92babe68-eec2-4ce6-886a-c576be9b66d8)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/a9be81af-e829-4ef8-bf46-cf12ab849bb2)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/875e870b-af60-4cde-8da8-7eb9d5ea409f)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/e6e6129f-eac6-4f68-8835-3006288f4ab3)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/6c65c733-65f4-4231-9904-57bccc7d4eeb)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/ff1a65d0-3fb3-4e3b-b050-9add8e1833aa)
+
+![image](https://github.com/abes-esr/itop-docker/assets/10114671/122e0c9a-398b-416f-bd39-91440f26777d)
+
 
 5/ Modifier les droits des fichiers itop : 
     
