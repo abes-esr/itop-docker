@@ -40,29 +40,46 @@ Les volumes sont montés dans `./volumes`.
 
 iTop est disponible à l'adresse :
 
-- iTop: (http://localhost:8080)
+- iTop: (http://localhost:28080)
 
 ### Installation d'itop (après un premier démarrage) :
 
-1/ Changer les droits :  
+1/ (Optionnel) Copier dans `volumes/talend` le répertoire `SUPPLEMENTS` du git Abes interne : https://git.abes.fr/supi/itop-talend , afin de faire fonctionner la récupération automatique d'information du SI par les jobs Talend.  
+Le conteneur itop-talend exécutera quotidiennement ces jobs.
 
-    chmod -R 777 volumes/itop/extensions/
+2/ Changer les droits des volumes et entrypoint :  
+
+    chmod -R 777 volumes
+    chmod 777 -R docker
+
+3/ Démarrer les conteneurs : 
+
+    sudo docker compose up --build -d
+
+4/ Installation par l'interface graphique d'itop. 
+
+    http://diplotaxis2-dev.v212.abes.fr:28080/
+
+Bien spécifier l'url publique d'itop (ex : https://itop-dev.abes.fr/) :
+
+5/ Modifier les droits des fichiers itop : 
+    
     sudo docker exec -it itop bash
     cd .. && chmod -R 777 itop && chmod 444 itop/conf/production/config-itop.php
 
-2/ Modifier une sauvegarde automatique :   
+6/ Modifier une sauvegarde automatique :   
 Fichier config-itop.php : bien mettre l'url publique de l'instance itop, et l'host de la BDD  
 Fichier itop-dump.sql : faire un rechercher/remplacer pour mettre : \`itop_user\`@\`%`    
 
-3/ Refaire le tar.gz (sans le répertoire), exemple :
+7/ Refaire le tar.gz (sans le répertoire), exemple :
 
     /mnt/c/Users/xxxx/Desktop/itop-2023-09-07_23_30$ tar zcvf ../itop-2023-09-07_23_30-3.tar.gz *
 
-4/ Copier / coller le tar.gz dans : data/backups/manual/
+8/ Copier / coller le tar.gz dans : data/backups/manual/
 
 sudo docker cp /tmp/itop-2023-11-01_23_30.tar.gz itop:/var/www/itop/data/backups/manual
 
-5/ Restaurer la sauvegarde, par l'interface d'admin d'itop.  
+9/ Restaurer la sauvegarde, par l'interface d'admin d'itop.  
 /!\ Attention les sauvegardes automatiques sont faites avec le user root. Elles ne peuvent pas être téléchargées par l'interface, sauf si on leur change leurs droits (777 par exemple).
 
 
