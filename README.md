@@ -44,8 +44,12 @@ iTop est disponible à l'adresse :
 
 ### Installation d'itop (après un premier démarrage) :
 
-1/ (Optionnel) Copier dans `volumes/talend` le répertoire `SUPPLEMENTS` du git Abes interne : https://git.abes.fr/supi/itop-talend , afin de faire fonctionner la récupération automatique d'information du SI par les jobs Talend.  
-Le conteneur itop-talend exécutera quotidiennement ces jobs.
+1/ (Optionnel) Copier dans `volumes/talend` le répertoire `SUPPLEMENTS` du git Abes interne : https://git.abes.fr/supi/itop-talend , afin de faire fonctionner la récupération automatique d'information du SI par le job Talend.
+
+/!\ Attention : il faut avoir dézipper le JobsZip/xxxLanceTousLesJobsxxx.zip et bien indiqué le chemin du shell correspondant en variable d'environnement.  
+Exemple : `/scripts/JobsZip/.../AB_LanceTousLesJobsPROD_run.sh`  
+
+Le conteneur itop-talend exécutera quotidiennement ce job.
 
 2/ Changer les droits des volumes et entrypoint :  
 
