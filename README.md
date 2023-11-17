@@ -23,6 +23,13 @@ Services will be available at following addresses:
 - iTop: (http://localhost:8080)
 - adminer: (http://localhost:8000)
 
+## Sauvegarde
+
+Todo : compléter les éléments à sauvegarder (ex: les dumps de la base mariadb)
+
+Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas besoin d'être sauvegardé. Et au contraire il est judicieux de l'exclure du système de sauvegarde car il contient les données binaires de du mariadb d'itop. 
+
+
 ## License
 
 MIT
