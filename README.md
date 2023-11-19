@@ -54,7 +54,7 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
 2/ Changer les droits des volumes et entrypoint :  
 
     chmod -R 777 volumes
-    chmod 777 -R docker
+    chmod -R 777 docker
 
 3/ Démarrer les conteneurs : 
 
