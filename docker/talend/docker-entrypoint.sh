@@ -10,9 +10,5 @@ echo "-> Installation de la crontab :"
 cat /etc/cron.d/tasks
 crontab /etc/cron.d/tasks
 
-# Force le démarrage du batch au démarrage du conteneur
-echo "-> Lancement de '$ITOP_TALEND_JOB' au démarrage du conteneur"
-$ITOP_TALEND_JOB
-
 # execute CMD (crond)
 exec "$@"
