@@ -95,6 +95,9 @@ services:
     restart: unless-stopped
     networks:
       - default
+    links:
+      - itop
+      - itop-db
     #Copier https://git.abes.fr/supi/itop-talend/-/tree/master/SUPPLEMENTS
     volumes:
       - ./volumes/talend/SUPPLEMENTS:/scripts
