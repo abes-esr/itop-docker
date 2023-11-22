@@ -3,7 +3,11 @@
 # Exit on error
 set -e
 
-{ echo "# Synchro itop data"; \
+{ echo "PATH=/usr/local/bin"; \
+  echo "ITOP_ADMIN=${ITOP_ADMIN}"; \
+  echo "ITOP_ADMIN_PASS=${ITOP_ADMIN_PASS}"; \
+  echo ""; \
+  echo "# Synchro itop data"; \
 	echo "30 21 * * * /bin/sh /var/www/synchro_exec_itop.sh > /tmp/synchro_itop.log"; \
 	echo ""; \
 	echo "# Taches plannifiees itop (sauvegardes auto)"; \
