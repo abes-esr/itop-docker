@@ -113,6 +113,13 @@ Sauvegarder le répertoire : ``/opt/pod/itop-docker/volumes/itop/data`` qui cont
 Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas besoin d'être sauvegardé. Et au contraire il est judicieux de l'exclure du système de sauvegarde car il contient les données binaires du mariadb d'itop. 
 
 
+### Architecture
+
+<img alt="schéma d'architecture" src="https://docs.google.com/drawings/d/e/2PACX-1vSw0aPhwUEQbgyMN4tEOdkqwE_KlH8ndaPgwFHF8sO3aHd9nI9CwWj_z89fYL2VDPfCIIzwecl0XRbf/pub?w=1135&amp;h=564">
+
+([lien](https://docs.google.com/drawings/d/1G4eAW5kOLmGZQzjN_4i-INiKT3ML1gLNGdSJa-8LZDE/edit) pour modifier le schéma - droits requis)
+
+
 ### License
 
 MIT
