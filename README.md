@@ -115,7 +115,7 @@ Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas beso
 
 ### Architecture
 
-<img alt="schéma d'architecture" src="https://docs.google.com/drawings/d/e/2PACX-1vSw0aPhwUEQbgyMN4tEOdkqwE_KlH8ndaPgwFHF8sO3aHd9nI9CwWj_z89fYL2VDPfCIIzwecl0XRbf/pub?w=1135&amp;h=564">
+<img alt="schéma d'architecture" src="https://docs.google.com/drawings/d/e/2PACX-1vSw0aPhwUEQbgyMN4tEOdkqwE_KlH8ndaPgwFHF8sO3aHd9nI9CwWj_z89fYL2VDPfCIIzwecl0XRbf/pub?w=2270&amp;h=1127">
 
 ([lien](https://docs.google.com/drawings/d/1G4eAW5kOLmGZQzjN_4i-INiKT3ML1gLNGdSJa-8LZDE/edit) pour modifier le schéma - droits requis)
 
