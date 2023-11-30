@@ -8,18 +8,19 @@ Changer les droits :
 
 
 
-Modifier une sauvegarde automatique : Fichier config-itop.php : bien mettre l'url publique de l'instance itop, et l'host de la BDD
-Fichier itop-dump.sql : faire un rechercher/remplacer pour mettre :
+Modifier une sauvegarde automatique :  
+Fichier `config-itop.php` : bien mettre l'url publique de l'instance itop, et l'host de la BDD  
+Fichier `itop-dump.sql` : faire un rechercher/remplacer pour mettre :
 
-`itop_user`@`%`
+> \`itop_user\`@\`%\`
 
 Refaire le tar.gz (sans le répertoire), exemple :
 
-/mnt/c/Users/charot/Desktop/itop-2023-09-07_23_30$ tar zcvf ../itop-2023-09-07_23_30-3.tar.gz *
+`/mnt/c/Users/NomDuCompte/Desktop/itop-2023-09-07_23_30$ tar zcvf ../itop-2023-09-07_23_30-3.tar.gz *`
 
-Copier / coller le tar.gz dans : data/backups/manual/
+Copier / coller le tar.gz dans : `data/backups/manual/`
 
-sudo docker cp /tmp/itop-2023-11-01_23_30.tar.gz itop:/var/www/itop/data/backups/manual
+`sudo docker cp /tmp/itop-2023-11-01_23_30.tar.gz itop:/var/www/itop/data/backups/manual`
 
 Restaurer la sauvegarde.
 
