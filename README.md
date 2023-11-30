@@ -97,9 +97,9 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
 
     /mnt/c/Users/xxxx/Desktop/itop-2023-09-07_23_30$ tar zcvf ../itop-2023-09-07_23_30-3.tar.gz *
 
-8/ Copier / coller le tar.gz dans : data/backups/manual/
+8/ Copier / coller le tar.gz dans : `data/backups/manual/`
 
-sudo docker cp /tmp/itop-2023-11-01_23_30.tar.gz itop:/var/www/itop/data/backups/manual
+    sudo docker cp /tmp/itop-2023-11-01_23_30.tar.gz itop:/var/www/itop/data/backups/manual
 
 9/ Restaurer la sauvegarde, par l'interface d'admin d'itop.  
 /!\ Attention les sauvegardes automatiques sont faites avec le user root. Elles ne peuvent pas être téléchargées par l'interface, sauf si on leur change leurs droits (777 par exemple).
