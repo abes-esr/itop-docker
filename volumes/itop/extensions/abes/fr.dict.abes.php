@@ -41,6 +41,13 @@ Dict::Add('FR FR', 'French', 'Français', array(
     'Class:PhysicalDevice/Attribute:status/Value:sortie_inventaire+' => 'Sortie d\'inventaire',
 	'Class:PhysicalDevice/Attribute:date_sortie' => 'Date de sortie d\'inventaire',
 	'Class:PhysicalDevice/Attribute:asset_number' => 'Numéro d\'immobilisation',
+    'Class:Monitor' => 'Ecran',
+        'Class:Monitor+' => 'Ecran d\'ordinateur',
+        'Class:Monitor/Attribute:technology' => 'Technologie',
+        'Class:Monitor/Attribute:technology+' => 'Technologie d\'affichage',
+        'Class:Monitor/Attribute:technology/Value:crt' => 'CRT',
+	'Class:Monitor/Attribute:technology/Value:lcd' => 'LCD',
+    'Class:Model/Attribute:type/Value:Monitor' => 'Ecran',
 ));
 
 ?>

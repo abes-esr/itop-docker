@@ -64,6 +64,9 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
 /!\ Attention les sauvegardes automatiques sont faites avec le user root. Elles ne peuvent pas être téléchargées par l'interface, sauf si on leur change leurs droits (777 par exemple).
 
 
+10/ Ajout d'une nouvelle classe :  
+Toolkit installé sur le test : https://www.itophub.io/wiki/page?id=3_1_0:customization:datamodel#installing_the_toolkit  
+Puis : https://www.itophub.io/wiki/page?id=latest:customization:add-class-sample  
 
 
 ### Sauvegarde
