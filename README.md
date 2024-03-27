@@ -49,8 +49,7 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
     cd .. && chmod -R 777 itop && chmod 444 itop/conf/production/config-itop.php
 
 6/ Modifier une sauvegarde automatique :   
-`Fichier config-itop.php` : bien mettre l'url publique de l'instance itop, et l'host de la BDD  
-`Fichier itop-dump.sql` : faire un rechercher/remplacer pour mettre : \`itop_user\`@\`%`    
+`Fichier config-itop.php` : bien mettre l'url publique de l'instance itop, et l'host de la BDD     
 
 7/ Refaire le tar.gz (sans le répertoire), exemple :
 
