@@ -3,6 +3,24 @@
 # Exit on error
 set -e
 
+# --- configuration pour envoyer des mail
+export SMTP_TLS=${SMTP_TLS:="off"}
+export SMTP_HOST=${SMTP_HOST:="itop-mailhog"}
+export SMTP_PORT=${SMTP_PORT:="1025"}
+export SMTP_MAILDOMAIN=${SMTP_MAILDOMAIN:="abes.fr"}
+export SMTP_USER=${SMTP_USER:=""}
+export SMTP_PASSWORD=${SMTP_PASSWORD:=""}
+# utilisation de msmtp pour envoyer de mails depuis php
+# la config est placee dans /etc/msmtprc
+# cela permet à PHP d'envoyer des mails
+sed -i 's#;sendmail_path =#sendmail_path = /usr/bin/msmtp -t -i#g' $PHP_INI_DIR/php.ini
+if [ "${SMTP_TLS}" = "on" ]; then
+  envsubst < /etc/msmtprc.tls.tmpl > /etc/msmtprc
+else
+  envsubst < /etc/msmtprc.notls.tmpl > /etc/msmtprc
+fi
+
+
 { echo "PATH=/usr/local/bin:/usr/bin:/bin"; \
   echo "ITOP_ADMIN=${ITOP_ADMIN}"; \
   echo "ITOP_ADMIN_PASS=${ITOP_ADMIN_PASS}"; \

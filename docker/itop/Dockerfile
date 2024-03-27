@@ -13,6 +13,16 @@ ARG PHP_MAX_INPUT_TIME
 ARG PHP_LOG_ERRORS
 ARG PHP_ERROR_REPORTING
 
+# pour avoir un client SMTP dans le conteneur (msmtp)
+# gettext-base: pour disposer de la commande envsubst (systeme de template)
+RUN set -x \
+    && DEBIAN_FRONTEND=noninteractive \
+    && apt-get update && apt-get install -y msmtp gettext-base
+
+# pour le système d'envoi de mail
+COPY msmtprc.tls.tmpl /etc/
+COPY msmtprc.notls.tmpl /etc/
+
 #=== Install gd php dependencie ===
 RUN set -x \
  && runtimeDeps="libfreetype6 libjpeg62-turbo" \
