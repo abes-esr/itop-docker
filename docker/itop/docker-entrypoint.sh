@@ -13,7 +13,7 @@ export SMTP_PASSWORD=${SMTP_PASSWORD:=""}
 # utilisation de msmtp pour envoyer de mails depuis php
 # la config est placee dans /etc/msmtprc
 # cela permet à PHP d'envoyer des mails
-sed -i 's#;sendmail_path =#sendmail_path = /usr/bin/msmtp -t -i#g' $PHP_INI_DIR/php.ini
+sed -i 's#;sendmail_path =#sendmail_path = /usr/bin/msmtp -t -i#g' $PHP_INI_DIR/php.ini-production
 if [ "${SMTP_TLS}" = "on" ]; then
   envsubst < /etc/msmtprc.tls.tmpl > /etc/msmtprc
 else
