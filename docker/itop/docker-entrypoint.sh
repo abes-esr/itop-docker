@@ -10,10 +10,8 @@ export SMTP_PORT=${SMTP_PORT:="1025"}
 export SMTP_MAILDOMAIN=${SMTP_MAILDOMAIN:="abes.fr"}
 export SMTP_USER=${SMTP_USER:=""}
 export SMTP_PASSWORD=${SMTP_PASSWORD:=""}
-# utilisation de msmtp pour envoyer de mails depuis php
 # la config est placee dans /etc/msmtprc
 # cela permet à PHP d'envoyer des mails
-sed -i 's#;sendmail_path =#sendmail_path = /usr/bin/msmtp -t -i#g' $PHP_INI_DIR/php.ini-production
 if [ "${SMTP_TLS}" = "on" ]; then
   envsubst < /etc/msmtprc.tls.tmpl > /etc/msmtprc
 else
@@ -85,6 +83,7 @@ else
 fi
 
 #=== Configure php ===
+# utilisation de msmtp pour envoyer de mails depuis php
 {
   echo "# php settings:"
   echo "date.timezone       = $PHP_TIMEZONE"
@@ -98,6 +97,7 @@ fi
   echo "max_input_time      = $PHP_MAX_INPUT_TIME"
   echo "log_errors          = $PHP_LOG_ERRORS"
   echo "error_reporting     = $PHP_ERROR_REPORTING"
+  echo "sendmail_path       = /usr/bin/msmtp -t -i"
 } | tee $PHP_INI_DIR/conf.d/php.ini
 
 #=== Set recommanded opcache settings ===
