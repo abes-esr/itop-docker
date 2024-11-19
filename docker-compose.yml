@@ -86,6 +86,8 @@ services:
       - ./volumes/itop/env-production-build:/var/www/itop/env-production-build
       - ./volumes/itop/extensions:/var/www/itop/extensions
       - ./volumes/itop/synchro_exec_itop.sh:/var/www/synchro_exec_itop.sh
+      #Permet de modifier le modèle de données, voir README section 10, à ne pas laisser en production :
+      #- ./volumes/itop/toolkit:/var/www/itop/toolkit
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="

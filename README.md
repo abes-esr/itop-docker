@@ -63,10 +63,35 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
 /!\ Attention les sauvegardes automatiques sont faites avec le user root. Elles ne peuvent pas être téléchargées par l'interface, sauf si on leur change leurs droits (777 par exemple).
 
 
-10/ Ajout d'une nouvelle classe :  
+10/ Ajout d'une nouvelle classe, modification d'attributs :    
+
 Toolkit installé sur le test : https://www.itophub.io/wiki/page?id=3_1_0:customization:datamodel#installing_the_toolkit  
 Puis : https://www.itophub.io/wiki/page?id=latest:customization:add-class-sample  
 
+Ajouter le volume suivant au conteneur itop, le temps de la mise à jour du modèle de données :    
+ ./volumes/itop/toolkit:/var/www/itop/toolkit
+
+    docker compose up -d
+    cd.. 
+    chmod -R 777 itop 
+    chmod 444 itop/conf/production/config-itop.php 
+    echo "set mouse-=a" >> ~/.vimrc
+
+Ajouter par exemple dans extensions/abes/datamodel.abes.xml : 
+
+    <class id="PhysicalDevice">       
+        <fields>         
+            <field id="status" xsi:type="AttributeEnum" _delta="merge">           
+                <values _delta="merge">             
+                    <value id="implementation" _delta="delete_if_exists">implementation</value>  
+
+Passer dans /toolkit et cliquer sur les 2 boutons : présents dans l’onglet Itop Update 
+Compilation : Update ITop Code  
+Si erreur de droits :  
+
+    chmod 777 -R /var/www/itop/data/
+
+Puis cliquer sur le bouton à côté d'Update ITop Code
 
 ### Sauvegarde
 
