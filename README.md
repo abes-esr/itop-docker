@@ -85,13 +85,8 @@ Ajouter par exemple dans extensions/abes/datamodel.abes.xml :
                 <values _delta="merge">             
                     <value id="implementation" _delta="delete_if_exists">implementation</value>  
 
-Passer dans /toolkit et cliquer sur les 2 boutons : présents dans l’onglet Itop Update 
-Compilation : Update ITop Code  
-Si erreur de droits :  
-
-    chmod 777 -R /var/www/itop/data/
-
-Puis cliquer sur le bouton à côté d'Update ITop Code
+Passer dans /toolkit et cliquer sur les 2 boutons : présents dans l’onglet ITop Update 
+Compilation : Update ITop Code
 
 ### Sauvegarde
 
