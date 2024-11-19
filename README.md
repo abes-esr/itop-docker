@@ -65,7 +65,7 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
 
 10/ Ajout d'une nouvelle classe, modification d'attributs :    
 
-Toolkit installé sur le test : https://www.itophub.io/wiki/page?id=3_1_0:customization:datamodel#installing_the_toolkit  
+Toolkit (installé sur l'environnement de dev et de test) : https://www.itophub.io/wiki/page?id=3_1_0:customization:datamodel#installing_the_toolkit  
 Puis : https://www.itophub.io/wiki/page?id=latest:customization:add-class-sample  
 
 Ajouter le volume suivant au conteneur itop, le temps de la mise à jour du modèle de données :    
