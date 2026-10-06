@@ -93,29 +93,51 @@ services:
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=itop"
       - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop"
-      
-  itop-talend:
-    build:
-      context: ./docker/talend
-      dockerfile: Dockerfile
-    container_name: itop-talend
+
+  itop-n8n:
+    image: docker.n8n.io/n8nio/n8n:2.40.0
+    container_name: itop-n8n
     restart: unless-stopped
     networks:
       - default
-    links:
-      - itop
-      - itop-db
-    #Copier https://git.abes.fr/supi/itop-talend/-/tree/master/SUPPLEMENTS
-    volumes:
-      - ./volumes/talend/SUPPLEMENTS:/scripts
-    mem_limit: ${ITOP_MEM_LIMIT}
-    memswap_limit: ${ITOP_MEMSWAP_LIMIT}
-    cpus: ${ITOP_CPU_LIMIT}
-    #Spécifier le job à démarrer TEST / PROD ou rien
+    ports:
+      - "${N8N_PORT:-5678}:5678"
     environment:
-      - ITOP_TALEND_JOB=${ITOP_TALEND_JOB}
+      - TZ=${ITOP_PHP_TIMEZONE}
+      - GENERIC_TIMEZONE=${ITOP_PHP_TIMEZONE}
+      - EXECUTIONS_DATA_SAVE_ON_ERROR=all
+      - EXECUTIONS_DATA_SAVE_ON_SUCCESS=all
+      - EXECUTIONS_DATA_SAVE_ON_PROGRESS=true
+      - EXECUTIONS_DATA_SAVE_MANUAL_EXECUTIONS=false
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=7
+      - DB_SQLITE_VACUUM_ON_STARTUP=true
+      - N8N_BLOCK_ENV_ACCESS_IN_NODE=false
+      - N8N_SECURE_COOKIE=false
+      - N8N_SCHEDULER_ENABLED=true
+      - N8N_USE_WORKFLOW_PUBLICATION_SERVICE=true
+      - N8N_COMMUNITY_PACKAGES_ENABLED=true
+      - N8N_COMMUNITY_PACKAGES_MANAGED_BY_ENV=true
+      - N8N_COMMUNITY_PACKAGES=[{"name":"n8n-nodes-sqlite-wasm","version":"0.1.5"}]
+      - N8N_MYSQL_PASSWORD=${N8N_MYSQL_PASSWORD}
+      - N8N_LDAP_SERVER=${N8N_LDAP_SERVER}
+      - N8N_LDAP_PASSWORD=${N8N_LDAP_PASSWORD}
+      - N8N_WAPT_CA=${N8N_WAPT_CA}
+      - N8N_WAPT_CERTIFICATE=${N8N_WAPT_CERTIFICATE}
+      - N8N_WAPT_PRIVATEKEY=${N8N_WAPT_PRIVATEKEY}
+      - N8N_WAPT_PASSPHRASE=${N8N_WAPT_PASSPHRASE}
+      - N8N_WAPT_AUTHORIZATION=${N8N_WAPT_AUTHORIZATION}
+      - N8N_OVIRT_USER=${N8N_OVIRT_USER}
+      - N8N_OVIRT_PASSWORD=${N8N_OVIRT_PASSWORD}
+    volumes:
+      - ./volumes/n8n:/home/node/.n8n
+      - ./volumes/n8n-files/SUPPLEMENTS:/home/node/.n8n-files
+      - ./n8n/sauvegarde:/sauvegarde
+    depends_on:
+      - itop-db
+    mem_limit: ${ITOP_MEM_LIMIT}
     labels:
       - "co.elastic.logs/enabled=true"
       - "co.elastic.logs/processors.add_fields.target="
       - "co.elastic.logs/processors.add_fields.fields.abes_appli=itop"
-      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop-talend"
+      - "co.elastic.logs/processors.add_fields.fields.abes_middleware=itop-n8n"

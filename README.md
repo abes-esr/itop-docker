@@ -1,4 +1,4 @@
-Ce dépôt est un fork de celui-ci : https://github.com/Maghin/docker-iTop/tree/master 
+Ce dépôt est un fork de celui-ci : https://github.com/Maghin/docker-iTop/tree/master
 
 Il s'agit d'une adaptation pour l'Abes.
 
@@ -7,20 +7,20 @@ Il s'agit d'une adaptation pour l'Abes.
 1/ (Optionnel) Copier dans `volumes/talend` le répertoire `SUPPLEMENTS` du git Abes interne : https://git.abes.fr/supi/itop-talend , afin de faire fonctionner la récupération automatique d'information du SI par le job Talend.
 
 /!\ Attention : il faut avoir dézipper le JobsZip/xxxLanceTousLesJobsxxx.zip et bien indiqué le chemin du shell correspondant en variable d'environnement.  
-Exemple : `/scripts/JobsZip/.../AB_LanceTousLesJobsPROD_run.sh`  
+Exemple : `/scripts/JobsZip/.../AB_LanceTousLesJobsPROD_run.sh`
 
 Le conteneur itop-talend exécutera quotidiennement ce job.
 
-2/ Changer les droits des volumes et entrypoint :  
+2/ Changer les droits des volumes et entrypoint :
 
     chmod -R 777 volumes
     chmod -R 777 docker
 
-3/ Démarrer les conteneurs : 
+3/ Démarrer les conteneurs :
 
     sudo docker compose up --build -d
 
-4/ Installation par l'interface graphique d'itop. 
+4/ Installation par l'interface graphique d'itop.
 
     http://diplotaxis2-dev.v212.abes.fr:28080/
 
@@ -43,13 +43,13 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
 ![image](https://github.com/abes-esr/itop-docker/assets/10114671/122e0c9a-398b-416f-bd39-91440f26777d)
 
 
-5/ Modifier les droits des fichiers itop : 
-    
+5/ Modifier les droits des fichiers itop :
+
     sudo docker exec -it itop bash
     cd .. && chmod -R 777 itop && chmod 444 itop/conf/production/config-itop.php
 
 6/ Modifier une sauvegarde automatique :   
-`Fichier config-itop.php` : bien mettre l'url publique de l'instance itop, et l'host de la BDD     
+`Fichier config-itop.php` : bien mettre l'url publique de l'instance itop, et l'host de la BDD
 
 7/ Refaire le tar.gz (sans le répertoire), exemple :
 
@@ -63,13 +63,13 @@ Le conteneur itop-talend exécutera quotidiennement ce job.
 /!\ Attention les sauvegardes automatiques sont faites avec le user root. Elles ne peuvent pas être téléchargées par l'interface, sauf si on leur change leurs droits (777 par exemple).
 
 
-10/ Ajout d'une nouvelle classe, modification d'attributs :    
+10/ Ajout d'une nouvelle classe, modification d'attributs :
 
 Toolkit (installé sur l'environnement de dev et de test) : https://www.itophub.io/wiki/page?id=3_1_0:customization:datamodel#installing_the_toolkit  
-Puis : https://www.itophub.io/wiki/page?id=latest:customization:add-class-sample  
+Puis : https://www.itophub.io/wiki/page?id=latest:customization:add-class-sample
 
 Ajouter le volume suivant au conteneur itop, le temps de la mise à jour du modèle de données :    
- ./volumes/itop/toolkit:/var/www/itop/toolkit
+./volumes/itop/toolkit:/var/www/itop/toolkit
 
     docker compose up -d
     cd.. 
@@ -77,7 +77,7 @@ Ajouter le volume suivant au conteneur itop, le temps de la mise à jour du mod�
     chmod 444 itop/conf/production/config-itop.php 
     echo "set mouse-=a" >> ~/.vimrc
 
-Ajouter par exemple dans extensions/abes/datamodel.abes.xml : 
+Ajouter par exemple dans extensions/abes/datamodel.abes.xml :
 
     <class id="PhysicalDevice">       
         <fields>         
@@ -85,14 +85,28 @@ Ajouter par exemple dans extensions/abes/datamodel.abes.xml :
                 <values _delta="merge">             
                     <value id="implementation" _delta="delete_if_exists">implementation</value>  
 
-Passer dans /toolkit et cliquer sur les 2 boutons : présents dans l’onglet ITop Update 
+Passer dans /toolkit et cliquer sur les 2 boutons : présents dans l’onglet ITop Update
 Compilation : Update ITop Code
+
+### Installation de n8n
+
+Au premier démarrage, il faut créer un premier comtpe (qui sera admin)
+
+Après le premier démarrage, importer les workflows et les credentials :
+
+    sudo docker compose exec itop-n8n n8n import:credentials --input=/sauvegarde/credentials
+    sudo docker compose exec itop-n8n n8n import:workflow --input=/sauvegarde/workflows'
+
+Pour exporter les workflows et/ou les credentials :
+
+    sudo docker compose exec itop-n8n n8n export:credentials --all --output=/sauvegarde/credentials    
+    sudo docker compose exec itop-n8n n8n export:workflow --all --output=/sauvegarde/workflows
 
 ### Sauvegarde
 
 Sauvegarder le répertoire : ``/opt/pod/itop-docker/volumes/itop/data`` qui contient les sauvegardes automatiques quotidiennes d'iTop.
 
-Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas besoin d'être sauvegardé. Et au contraire il est judicieux de l'exclure du système de sauvegarde car il contient les données binaires du mariadb d'itop. 
+Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas besoin d'être sauvegardé. Et au contraire il est judicieux de l'exclure du système de sauvegarde car il contient les données binaires du mariadb d'itop.
 
 
 ### Architecture
