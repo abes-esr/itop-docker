@@ -119,6 +119,7 @@ services:
       - N8N_COMMUNITY_PACKAGES_ENABLED=true
       - N8N_COMMUNITY_PACKAGES_MANAGED_BY_ENV=true
       - N8N_COMMUNITY_PACKAGES=[{"name":"n8n-nodes-sqlite-wasm","version":"0.1.5"}]
+      - N8N_ENCRYPTION_KEY=${N8N_ENCRYPTION_KEY}
       - N8N_MYSQL_PASSWORD=${N8N_MYSQL_PASSWORD}
       - N8N_LDAP_SERVER=${N8N_LDAP_SERVER}
       - N8N_LDAP_PASSWORD=${N8N_LDAP_PASSWORD}
@@ -132,7 +133,7 @@ services:
     volumes:
       - ./volumes/n8n:/home/node/.n8n
       - ./volumes/n8n-files/SUPPLEMENTS:/home/node/.n8n-files
-      - ./n8n/sauvegarde:/sauvegarde
+      - ./docker/n8n/sauvegarde:/sauvegarde
     depends_on:
       - itop-db
     mem_limit: ${ITOP_MEM_LIMIT}

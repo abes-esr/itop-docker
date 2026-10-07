@@ -90,17 +90,22 @@ Compilation : Update ITop Code
 
 ### Installation de n8n
 
+Avant le premier démarrage, créer le répertoire volumes/n8n et donner des droits en écriture aux "autres". Il faut donner les mêmes droits au répertoire ./docker/n8n/sauvegarde
+
 Au premier démarrage, il faut créer un premier comtpe (qui sera admin)
 
-Après le premier démarrage, importer les workflows et les credentials :
+Après le premier démarrage, importer les credentials. Puis importer et publier les workflows :
 
     sudo docker compose exec itop-n8n n8n import:credentials --input=/sauvegarde/credentials
-    sudo docker compose exec itop-n8n n8n import:workflow --input=/sauvegarde/workflows'
+    
+    sudo docker compose exec itop-n8n n8n import:workflow --input=/sauvegarde/workflows 
+    ids=$(sudo docker compose exec -T itop-n8n n8n list:workflow --onlyId); i=0; for id in $ids; do i=$((i+1)); echo "[$i/29] Publication de $id"; sudo docker compose exec -T itop-n8n n8n publish:workflow --id="$id"; done
+    sudo docker compose restart itop-n8n
 
-Pour exporter les workflows et/ou les credentials :
+Pour exporter les credentials et les workflows (non archivés) :
 
     sudo docker compose exec itop-n8n n8n export:credentials --all --output=/sauvegarde/credentials    
-    sudo docker compose exec itop-n8n n8n export:workflow --all --output=/sauvegarde/workflows
+    sudo docker compose exec itop-n8n n8n export:workflow --all --published --output=/sauvegarde/workflows
 
 ### Sauvegarde
 
@@ -110,6 +115,8 @@ Le contenu du répertoire ``/opt/pod/itop-docker/volumes/mariadb/`` n'a pas beso
 
 
 ### Architecture
+
+TODO : mettre à jour le schéma quand N8n sera passé en production 
 
 <img alt="schéma d'architecture" src="https://docs.google.com/drawings/d/e/2PACX-1vSw0aPhwUEQbgyMN4tEOdkqwE_KlH8ndaPgwFHF8sO3aHd9nI9CwWj_z89fYL2VDPfCIIzwecl0XRbf/pub?w=2270&amp;h=1127">
 
