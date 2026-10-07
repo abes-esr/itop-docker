@@ -92,7 +92,7 @@ Compilation : Update ITop Code
 
 Avant le premier démarrage, créer le répertoire volumes/n8n et donner des droits en écriture aux "autres". Il faut donner les mêmes droits au répertoire ./docker/n8n/sauvegarde
 
-Au premier démarrage, il faut créer un premier comtpe (qui sera admin)
+Au premier démarrage, il faut créer un premier compte (qui sera admin)
 
 Après le premier démarrage, importer les credentials. Puis importer et publier les workflows :
 
