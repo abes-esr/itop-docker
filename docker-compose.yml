@@ -3,7 +3,7 @@
 
 services:
   itop-db:
-    image: mariadb:10.4
+    image: mariadb:10.11
     container_name: itop-db
     restart: unless-stopped 
     stdin_open: true

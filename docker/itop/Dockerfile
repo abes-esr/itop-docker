@@ -1,7 +1,7 @@
 ##################################
 #=== Single stage with payload ===
 ##################################
-FROM php:7.4-apache
+FROM php:8.3.36-apache
 
 ARG PHP_TIMEZONE
 ARG PHP_ENABLE_UPLOADS
@@ -47,20 +47,21 @@ RUN set -x \
  && rm -rf /var/lib/apt/lists/*
 
 #=== Install intl php dependencie ===
-RUN set -x \
- && runtimeDeps="libicu67" \
- && buildDeps="libicu-dev" \
- && apt-get update && apt-get install -y ${buildDeps} ${runtimeDeps} --no-install-recommends \
- \
- && docker-php-ext-configure intl \
- && docker-php-ext-install intl \
- \
- && apt-get autoremove -y ${buildDeps} \
- && rm -rf /var/lib/apt/lists/*
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends libicu-dev; \
+    docker-php-ext-configure intl; \
+    docker-php-ext-install -j"$(nproc)" intl; \
+    apt-get purge -y --auto-remove libicu-dev; \
+    rm -rf /var/lib/apt/lists/*
 
 #=== Install mysqli php dependencie ===
 RUN set -x \
  && docker-php-ext-install mysqli
+
+#=== Disable SSL for local MariaDB client ===
+RUN mkdir -p /etc/mysql/conf.d \
+ && printf '[client]\nskip-ssl\n' > /etc/mysql/conf.d/disable-ssl.cnf \
 
 #=== Install graphviz ===
 RUN set -x \
